@@ -18,7 +18,7 @@ function love.keypressed(key)
 end
 
 function love.draw()
-    love.graphics.print('Hello World!', 400, 300)
+    player:draw()
 end
 
 function love.update(dt)
