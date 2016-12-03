@@ -28,6 +28,7 @@ function love.draw()
         map:draw()
         world:update(love.timer.getDelta(), drawSystems)
     end
+    love.graphics.print("Entity Count: " .. world:getEntityCount(), 0,0)
 end
 
 
@@ -35,7 +36,6 @@ function love.update(dt)
     Timer.update(dt)
     if world then
         world:update(love.timer.getDelta(), updateSystems)
-        print (world:getEntityCount())
     end
 end
 
