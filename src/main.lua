@@ -3,12 +3,17 @@ lume = require '../vendor/lume'
 Class = require '../vendor/hump.class'
 Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
+sti = require "../vendor/sti.init"
+--require 'tiledmap'
+
+local x, y = 0,0
 
 local Player = require 'player'
 local player = nil
 
 function love.load()
     init()
+    map = sti("tiled/ourfirsttiles.lua", {  })
 end
 
 function love.keypressed(key)
@@ -18,6 +23,7 @@ function love.keypressed(key)
 end
 
 function love.draw()
+    map:draw()
     player:draw()
 end
 
