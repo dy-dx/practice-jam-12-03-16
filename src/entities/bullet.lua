@@ -8,16 +8,18 @@ end
 
 function Bullet:reset(x, y, movingRight)
     self.isDead = false
+    self.isSolid = true
     self.hasProjectilePhysics = true
+    self.isBullet = true
 
     self.pos = {x = x, y = y}
+    self.vel = {x = 0, y = 0}
 
     if movingRight then
-        self.xVelocity = 500
-    else 
-        self.xVelocity = -500
+        self.vel.x = 500
+    else
+        self.vel.x = -500
     end
-    self.yVelocity = 0
 end
 
 function Bullet:draw()
