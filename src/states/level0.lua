@@ -1,4 +1,5 @@
 local Player = require 'entities/player'
+local Met = require 'entities/met'
 
 local Level = Class{}
 function Level:init()
@@ -14,6 +15,7 @@ function Level:load()
 
     player = Player()
     world:addEntity(player)
+    world:addEntity(Met(300, 500))
 end
 
 return Level
