@@ -1,6 +1,6 @@
 To run
 
-`love2d src`
+`love src`
 
 To install dependencies with luarocks
 

@@ -37,8 +37,8 @@ function Player:update(dt)
 
     self.y = self.y + self.yVelocity * dt
     self.x = self.x + self.xVelocity * dt
-    self.x = lume.clamp(self.x, 0, 800);
-    self.y = lume.clamp(self.y, 0, 500);
+    self.x = lume.clamp(self.x, 0, 800)
+    self.y = lume.clamp(self.y, 0, 500)
 end
 
 return Player
