@@ -67,6 +67,8 @@ function PlayerControlSystem:process(e, dt)
         e.canShoot = false
     end
 
+    -- anim8 uses flippedH by default, but that is kind of a crappy variable name, so we set it at the end
+    e.flippedH = not e.facingRight
 end
 
 return PlayerControlSystem
