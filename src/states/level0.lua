@@ -8,7 +8,8 @@ function Level:load()
     -- globals: i'll fix this, don't worry bout it
     world = tiny.world(
         require ("systems/spritesystem")(),
-        require ("systems/playercontrolsystem")()
+        require ("systems/playercontrolsystem")(),
+        require ("systems/physicscontrolsystem")()
     )
 
     player = Player()

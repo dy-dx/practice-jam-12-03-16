@@ -18,6 +18,10 @@ function Player:reset()
     self.maxJumpTime = 0.3
     self.canJump = true
     self.jumpTime = 0
+
+    self.timeBetweenShots = 0.1
+    self.canShoot = true
+    self.timeSinceShot = 1
 end
 
 function Player:draw()

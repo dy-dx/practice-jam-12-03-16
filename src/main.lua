@@ -35,6 +35,7 @@ function love.update(dt)
     Timer.update(dt)
     if world then
         world:update(love.timer.getDelta(), updateSystems)
+        print (world:getEntityCount())
     end
 end
 
