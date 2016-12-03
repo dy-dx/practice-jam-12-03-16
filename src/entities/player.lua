@@ -20,7 +20,7 @@ function Player:reset()
     self.gravity = 1000
 
     -- just guessing here
-    self.hitbox = {x = 2, y = 2, w = 16, h = 16}
+    self.hitbox = {x = 10, y = 10, w = 30, h = 30}
 
     self.maxJumpTime = 0.3
     self.canJump = true
