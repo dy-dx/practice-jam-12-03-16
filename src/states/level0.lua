@@ -9,7 +9,7 @@ function Level:load()
     world = tiny.world(
         require ("systems/spritesystem")(),
         require ("systems/playercontrolsystem")(),
-        require ("systems/simplephysicssystem")()
+        require ("systems/projectilephysicssystem")()
     )
 
     player = Player()
