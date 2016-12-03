@@ -27,7 +27,8 @@ function Player:reset()
 
     local g = anim8.newGrid(50, 50, assets.img_megaman:getWidth(), assets.img_megaman:getHeight())
     self.animation_stand = anim8.newAnimation(g('1-1', 1), 0.1)
-    self.animation_walk = anim8.newAnimation(g('2-5', 1), 0.1)
+    self.animation_walk = anim8.newAnimation(g('4-6', 1), 0.1)
+    self.animation_walkShoot = anim8.newAnimation(g('4-6', 2), 0.1)
     self.animation = self.animation_walk
 end
 
