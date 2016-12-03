@@ -31,10 +31,13 @@ function Player:reset()
     self.timeSinceShot = 1
 
     local g = anim8.newGrid(50, 50, assets.img_megaman:getWidth(), assets.img_megaman:getHeight())
-    self.animation_stand = anim8.newAnimation(g('1-1', 1), 0.1)
-    self.animation_walk = anim8.newAnimation(g('4-6', 1), 0.1)
-    self.animation_walkShoot = anim8.newAnimation(g('4-6', 2), 0.1)
-    self.animation = self.animation_walk
+    self.animationStand = anim8.newAnimation(g('1-1', 1), 0.1)
+    self.animationShoot = anim8.newAnimation(g(3, 2), 0.1)
+    self.animationWalk = anim8.newAnimation(g('4-6', 1), 0.1)
+    self.animationWalkShoot = anim8.newAnimation(g('4-6', 2), 0.1)
+    self.animationJump = anim8.newAnimation(g(7, 1), 0.1)
+    self.animationJumpShoot = anim8.newAnimation(g(7, 2), 0.1)
+    self.animation = self.animationStand
 end
 
 function Player:getBounds()

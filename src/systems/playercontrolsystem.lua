@@ -18,20 +18,30 @@ function PlayerControlSystem:postProcess(dt)
 end
 
 function PlayerControlSystem:process(e, dt)
+    -- update cool down timers and toggle bools.
+    if not e.canShoot then
+        e.timeSinceShot = e.timeSinceShot + dt
+        if e.timeSinceShot >= e.timeBetweenShots then
+            e.canShoot = true
+        end
+    end
+
     if (e.grounded) then
         e.jumpTime = 0
         e.canJump = true
     end
 
-    if self.input:down("up") and e.canJump then
-        e.vel.y = e.jumpVelocity
-        e.jumpTime = e.jumpTime + dt
-    end
     if self.input:released("up") then
         e.canJump = false
     end
     if e.jumpTime >= e.maxJumpTime then
         e.canJump = false
+    end
+
+    -- change state based on input
+    if self.input:down("up") and e.canJump then
+        e.vel.y = e.jumpVelocity
+        e.jumpTime = e.jumpTime + dt
     end
 
     if self.input:down("left") then
@@ -48,20 +58,29 @@ function PlayerControlSystem:process(e, dt)
         e.vel.x = 0
     end
 
-    -- tmp shit
-    e.pos.x = lume.clamp(e.pos.x, 0, 800)
-
-    if not e.canShoot then
-        e.timeSinceShot = e.timeSinceShot + dt
-        if e.timeSinceShot >= e.timeBetweenShots then
-            e.canShoot = true
-        end
-    end
-
     if self.input:down("z") and e.canShoot then
         world:addEntity(Bullet(e.pos.x + 5, e.pos.y + 5, e.facingRight))
         e.timeSinceShot = 0
         e.canShoot = false
+    end
+    
+    -- select animation
+    -- shooting
+    if self.input:down("z") then
+        if not e.grounded then
+            e.animation = e.animationJumpShoot
+        elseif self.input:down("right") or self.input:down("left") then
+            e.animation = e.animationWalkShoot
+        else
+            e.animation = e.animationShoot
+        end
+    -- non-shooting
+    elseif not e.grounded then
+        e.animation = e.animationJump
+    elseif self.input:down("right") or self.input:down("left") then
+        e.animation = e.animationWalk
+    else
+        e.animation = e.animationStand
     end
 
     -- anim8 uses flippedH by default, but that is kind of a crappy variable name, so we set it at the end
