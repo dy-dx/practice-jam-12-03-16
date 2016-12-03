@@ -18,19 +18,6 @@ function PlayerControlSystem:postProcess(dt)
 end
 
 function PlayerControlSystem:process(e, dt)
-    if not e.canShoot then
-        e.timeSinceShot = e.timeSinceShot + dt
-        if e.timeSinceShot >= e.timeBetweenShots then
-            e.canShoot = true
-        end
-    end
-
-    if self.input:down("z") and e.canShoot then
-        world:addEntity(Bullet(e.pos.x + 5, e.pos.y - 5, "right"))
-        e.timeSinceShot = 0
-        e.canShoot = false
-    end
-
     e.yVelocity = e.yVelocity + e.gravity * dt
 
     if self.input:down("up") and e.canJump then
@@ -46,8 +33,14 @@ function PlayerControlSystem:process(e, dt)
 
     if self.input:down("left") then
         e.xVelocity = -e.xSpeed
+        if not self.input:down("z") then
+            e.facingRight = false
+        end
     elseif self.input:down("right") then
         e.xVelocity = e.xSpeed
+        if not self.input:down("z") then
+            e.facingRight = true
+        end
     else
         e.xVelocity = 0
     end
@@ -60,6 +53,20 @@ function PlayerControlSystem:process(e, dt)
         e.jumpTime = 0
         e.canJump = true
     end
+
+    if not e.canShoot then
+        e.timeSinceShot = e.timeSinceShot + dt
+        if e.timeSinceShot >= e.timeBetweenShots then
+            e.canShoot = true
+        end
+    end
+
+    if self.input:down("z") and e.canShoot then
+        world:addEntity(Bullet(e.pos.x + 5, e.pos.y + 5, e.facingRight))
+        e.timeSinceShot = 0
+        e.canShoot = false
+    end
+
 end
 
 return PlayerControlSystem

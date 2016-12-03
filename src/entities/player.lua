@@ -11,6 +11,7 @@ end
 function Player:reset()
     self.controllable = true
     self.pos = {x = 100, y = 500}
+    self.facingRight = true
     self.xVelocity = 0
     self.yVelocity = 0
     self.xSpeed = 200

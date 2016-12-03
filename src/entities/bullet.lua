@@ -1,21 +1,21 @@
 -- http://hump.readthedocs.io/en/latest/class.html
 local Bullet = Class{}
 
-function Bullet:init(x, y, dir)
+function Bullet:init(x, y, movingRight)
     self.sprite = love.graphics.newImage("assets/images/bullet.png")
-    self:reset(x, y, dir)
+    self:reset(x, y, movingRight)
 end
 
-function Bullet:reset(x, y, dir)
+function Bullet:reset(x, y, movingRight)
     self.isDead = false
     self.hasProjectilePhysics = true
 
     self.pos = {x = x, y = y}
 
-    if dir == "left" then
-        self.xVelocity = -500
-    else 
+    if movingRight then
         self.xVelocity = 500
+    else 
+        self.xVelocity = -500
     end
     self.yVelocity = 0
 end
