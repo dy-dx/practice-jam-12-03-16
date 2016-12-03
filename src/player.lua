@@ -14,6 +14,10 @@ function Player:reset()
     self.xSpeed = 200
     self.jumpVelocity = -200
     self.gravity = 1000
+
+    self.maxJumpTime = 0.3
+    self.canJump = true
+    self.jumpTime = 0
 end
 
 function Player:draw()
@@ -23,13 +27,20 @@ end
 function Player:update(dt)
     self.yVelocity = self.yVelocity + self.gravity * dt
 
-    if love.keyboard.isDown("up") then
+    if input:down("up") and self.canJump then
         self.yVelocity = self.jumpVelocity
+        self.jumpTime = self.jumpTime + dt
+    end
+    if input:released("up") then
+        self.canJump = false
+    end
+    if self.jumpTime >= self.maxJumpTime then
+        self.canJump = false
     end
 
-    if love.keyboard.isDown("left") then
+    if input:down("left") then
         self.xVelocity = -self.xSpeed
-    elseif love.keyboard.isDown("right") then
+    elseif input:down("right") then
         self.xVelocity = self.xSpeed
     else
         self.xVelocity = 0
@@ -38,7 +49,11 @@ function Player:update(dt)
     self.y = self.y + self.yVelocity * dt
     self.x = self.x + self.xVelocity * dt
     self.x = lume.clamp(self.x, 0, 800)
-    self.y = lume.clamp(self.y, 0, 500)
+    if (self.y > 500) then 
+        self.y = 500
+        self.jumpTime = 0
+        self.canJump = true
+    end
 end
 
 return Player
