@@ -4,17 +4,12 @@ Class = require '../vendor/hump.class'
 Input = require '../vendor/input'
 Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
+tiny = require '../vendor/tiny'
 
-
-local Player = require 'player'
-local player = nil
+local level = require 'states/level0'
 
 function love.load()
     init()
-    input = Input()
-    input:bind('left', 'left')
-    input:bind('right', 'right')
-    input:bind('up', 'up')
 end
 
 function love.keypressed(key)
@@ -23,18 +18,30 @@ function love.keypressed(key)
     end
 end
 
-function love.draw()
-    player:draw()
+function love.draw(dt)
+    if world then
+        local dt = love.timer.getDelta()
+        Timer.update(dt)
+        world:update(dt)
+        -- temp, don't worry bout it
+        if player then
+            player:update(dt)
+        end
+    end
 end
 
 function love.update(dt)
-    Timer.update(dt)
-    player:update(dt)
+    -- using draw callback instead. uhhhh don't worry about it
 end
 
 
 function init()
-    player = Player()
+    level = level()
+    level = level:load()
+    input = Input()
+    input:bind('left', 'left')
+    input:bind('right', 'right')
+    input:bind('up', 'up')
 end
 
 function reset()

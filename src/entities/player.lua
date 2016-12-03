@@ -2,13 +2,12 @@
 local Player = Class{}
 
 function Player:init()
-    self.image = love.graphics.newImage("assets/images/megaman_sample_sprite_right.png")
+    self.sprite = love.graphics.newImage("assets/images/megaman_sample_sprite_right.png")
     self:reset()
 end
 
 function Player:reset()
-    self.x = 100
-    self.y = 500
+    self.pos = {x = 100, y = 500}
     self.xVelocity = 0
     self.yVelocity = 0
     self.xSpeed = 200
@@ -21,7 +20,6 @@ function Player:reset()
 end
 
 function Player:draw()
-    love.graphics.draw(self.image, self.x, self.y)
 end
 
 function Player:update(dt)
@@ -46,11 +44,11 @@ function Player:update(dt)
         self.xVelocity = 0
     end
 
-    self.y = self.y + self.yVelocity * dt
-    self.x = self.x + self.xVelocity * dt
-    self.x = lume.clamp(self.x, 0, 800)
-    if (self.y > 500) then 
-        self.y = 500
+    self.pos.y = self.pos.y + self.yVelocity * dt
+    self.pos.x = self.pos.x + self.xVelocity * dt
+    self.pos.x = lume.clamp(self.pos.x, 0, 800)
+    if (self.pos.y > 500) then
+        self.pos.y = 500
         self.jumpTime = 0
         self.canJump = true
     end
