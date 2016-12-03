@@ -2,6 +2,7 @@ local SpriteSystem = Class{}
 SpriteSystem = tiny.processingSystem(SpriteSystem)
 
 function SpriteSystem:init()
+    self.isDrawingSystem = true
     self.filter = tiny.requireAll('sprite', 'pos')
 end
 

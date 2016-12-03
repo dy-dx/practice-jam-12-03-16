@@ -18,16 +18,21 @@ function love.keypressed(key)
     end
 end
 
+local drawSystems = function(_, s) return not not s.isDrawingSystem end
+local updateSystems = function(_, s) return not s.isDrawingSystem end
+
 function love.draw(dt)
     if world then
-        local dt = love.timer.getDelta()
-        Timer.update(dt)
-        world:update(dt)
+        world:update(love.timer.getDelta(), drawSystems)
     end
 end
 
+
 function love.update(dt)
-    -- using draw callback instead. uhhhh don't worry about it
+    Timer.update(dt)
+    if world then
+        world:update(love.timer.getDelta(), updateSystems)
+    end
 end
 
 
