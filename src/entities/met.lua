@@ -28,7 +28,7 @@ function Met:init(x, y, target)
 
     }
 
-    self.hitbox = {w = 30, h = 21}
+    self.hitbox = {x = 0, y = 0, w = 16, h = 16}
     self.health = 50
     self.maxHealth = 50
 

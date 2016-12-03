@@ -10,13 +10,17 @@ end
 
 function Player:reset()
     self.controllable = true
+    self.isAlive = true
+    self.isSolid = true
     self.pos = {x = 100, y = 500}
     self.facingRight = true
-    self.xVelocity = 0
-    self.yVelocity = 0
+    self.vel = {x = 0, y = 0}
     self.xSpeed = 200
     self.jumpVelocity = -200
     self.gravity = 1000
+
+    -- just guessing here
+    self.hitbox = {x = 2, y = 2, w = 16, h = 16}
 
     self.maxJumpTime = 0.3
     self.canJump = true
@@ -31,6 +35,10 @@ function Player:reset()
     self.animation_walk = anim8.newAnimation(g('4-6', 1), 0.1)
     self.animation_walkShoot = anim8.newAnimation(g('4-6', 2), 0.1)
     self.animation = self.animation_walk
+end
+
+function Player:getBounds()
+    return self.pos.x + self.hitbox.x, self.pos.y + self.hitbox.y, self.hitbox.w, self.hitbox.h
 end
 
 function Player:draw()

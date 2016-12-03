@@ -18,10 +18,13 @@ function PlayerControlSystem:postProcess(dt)
 end
 
 function PlayerControlSystem:process(e, dt)
-    e.yVelocity = e.yVelocity + e.gravity * dt
+    if (e.grounded) then
+        e.jumpTime = 0
+        e.canJump = true
+    end
 
     if self.input:down("up") and e.canJump then
-        e.yVelocity = e.jumpVelocity
+        e.vel.y = e.jumpVelocity
         e.jumpTime = e.jumpTime + dt
     end
     if self.input:released("up") then
@@ -32,27 +35,21 @@ function PlayerControlSystem:process(e, dt)
     end
 
     if self.input:down("left") then
-        e.xVelocity = -e.xSpeed
+        e.vel.x = -e.xSpeed
         if not self.input:down("z") then
             e.facingRight = false
         end
     elseif self.input:down("right") then
-        e.xVelocity = e.xSpeed
+        e.vel.x = e.xSpeed
         if not self.input:down("z") then
             e.facingRight = true
         end
     else
-        e.xVelocity = 0
+        e.vel.x = 0
     end
 
-    e.pos.y = e.pos.y + e.yVelocity * dt
-    e.pos.x = e.pos.x + e.xVelocity * dt
+    -- tmp shit
     e.pos.x = lume.clamp(e.pos.x, 0, 800)
-    if (e.pos.y > 500) then
-        e.pos.y = 500
-        e.jumpTime = 0
-        e.canJump = true
-    end
 
     if not e.canShoot then
         e.timeSinceShot = e.timeSinceShot + dt
