@@ -6,7 +6,7 @@ Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
 tiny = require '../vendor/tiny'
 
-local level = require 'states/level0'
+local level = require('states/level0')()
 
 function love.load()
     init()
@@ -23,10 +23,6 @@ function love.draw(dt)
         local dt = love.timer.getDelta()
         Timer.update(dt)
         world:update(dt)
-        -- temp, don't worry bout it
-        if player then
-            player:update(dt)
-        end
     end
 end
 
@@ -36,12 +32,7 @@ end
 
 
 function init()
-    level = level()
-    level = level:load()
-    input = Input()
-    input:bind('left', 'left')
-    input:bind('right', 'right')
-    input:bind('up', 'up')
+    level:load()
 end
 
 function reset()
