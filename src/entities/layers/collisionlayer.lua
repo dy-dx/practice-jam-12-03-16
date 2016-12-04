@@ -14,8 +14,8 @@ function CollisionLayer:init(tileMap, bumpWorld)
                         prefix..layer.name..", "..x..", "..y..")",
                         (x - 1) * tileMap.tilewidth + tile.offset.x,
                         (y - 1) * tileMap.tileheight + tile.offset.y,
-                        tileMap.tilewidth,
-                        tileMap.tileheight
+                        tile.width,
+                        tile.height
                     )
                 end
             end
