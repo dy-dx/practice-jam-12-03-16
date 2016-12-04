@@ -19,7 +19,7 @@ end
 local level = require('states/level0')()
 
 function love.load()
-    Global.map = sti("tiled/ourfirsttiles.lua", { })
+    Global.map = sti("tiled/level1.lua", { })
     init()
 end
 

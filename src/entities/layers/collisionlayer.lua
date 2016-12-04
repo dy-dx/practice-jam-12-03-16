@@ -6,7 +6,7 @@ function CollisionLayer:init(tileMap, bumpWorld)
     self:reset()
 
     for lindex, layer in ipairs(tileMap.layers) do
-        if layer.name == 'MiddleLayer' then
+        if layer.name == 'CollisionLayer' then
             local prefix = layer.properties.oneway == "true" and "o(" or "t("
             for y, tiles in ipairs(layer.data) do
                 for x, tile in pairs(tiles) do

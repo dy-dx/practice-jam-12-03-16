@@ -29,10 +29,7 @@ function Level:load()
     world:addEntity(drawLayer)
     world:addEntity(collisionlayer)
     world:addEntity(player)
-    world:addEntity(Met(300, 500))
-    world:addEntity(CollisionBox(0, 550, 800, 30))
-    world:addEntity(CollisionBox(0, 0, 40, 600))
-    world:addEntity(CollisionBox(700, 0, 40, 600))
+    world:addEntity(Met(700, 500))
 end
 
 return Level
