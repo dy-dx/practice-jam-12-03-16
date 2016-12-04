@@ -15,7 +15,7 @@ function Bullet:reset(x, y, movingRight)
     self.hitbox = {x = 10, y = 10, w = 15, h = 15}
 
     self.isDead = false
-    self.isSolid = true
+    self.isSolid = false
     self.hasProjectilePhysics = true
     self.isBullet = true
 
