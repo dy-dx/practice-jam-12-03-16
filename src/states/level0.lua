@@ -24,7 +24,7 @@ function Level:load()
 
     player = Player()
     drawLayer = DrawLayer()
-    collisionlayer = CollisionLayer(Global.map)
+    collisionlayer = CollisionLayer(Global.map, bumpWorld)
 
     world:addEntity(drawLayer)
     world:addEntity(collisionlayer)
