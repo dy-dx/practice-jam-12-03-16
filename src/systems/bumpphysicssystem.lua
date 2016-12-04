@@ -43,12 +43,15 @@ local function collisionFilter(e1, e2)
 end
 
 function BumpPhysicsSystem:process(e, dt)
+    local hitbox = e.hitbox
     local pos = e.pos
     local vel = e.vel
     local gravity = e.gravity or 0
     vel.y = vel.y + gravity * dt
     local cols, len
-    pos.x, pos.y, cols, len = self.bumpWorld:move(e, pos.x + vel.x * dt, pos.y + vel.y * dt, collisionFilter)
+    pos.x, pos.y, cols, len = self.bumpWorld:move(e, pos.x+hitbox.x + vel.x * dt, pos.y+hitbox.y + vel.y * dt, collisionFilter)
+    pos.x = pos.x - hitbox.x
+    pos.y = pos.y - hitbox.y
     e.grounded = false
     for i = 1, len do
         local col = cols[i]
