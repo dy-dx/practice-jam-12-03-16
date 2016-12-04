@@ -18,8 +18,8 @@ end
 local level = require('states/level0')()
 
 function love.load()
-    init()
     Global.map = sti("tiled/ourfirsttiles.lua", {  });
+    init()
 end
 
 function love.keypressed(key)
