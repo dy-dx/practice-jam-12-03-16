@@ -1,4 +1,5 @@
 local bump = require('vendor/bump')
+local sti = require "../vendor/sti.init"
 local Player = require 'entities/player'
 local Met = require 'entities/met'
 local DrawLayer = require 'entities/layers/drawlayer'
@@ -22,9 +23,12 @@ function Level:load()
         require ("systems/debughitboxsystem")()
     )
 
-    player = Player()
-    drawLayer = DrawLayer()
-    collisionlayer = CollisionLayer(Global.map, bumpWorld)
+    local player = Player()
+    local tileMap = sti("tiled/level1.lua", { })
+    -- fixme
+    Global.map = tileMap
+    local drawLayer = DrawLayer(tileMap)
+    local collisionlayer = CollisionLayer(tileMap, bumpWorld)
 
     world:addEntity(drawLayer)
     world:addEntity(collisionlayer)

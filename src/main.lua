@@ -4,7 +4,6 @@ Class = require '../vendor/hump.class'
 Input = require '../vendor/input'
 Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
-sti = require "../vendor/sti.init"
 tiny = require '../vendor/tiny'
 local Sound = require 'sound'
 
@@ -19,14 +18,7 @@ end
 local level = require('states/level0')()
 
 function love.load()
-    Global.map = sti("tiled/level1.lua", { })
-    init()
-end
-
-function love.keypressed(key)
-    if key == 'r' then
-        reset()
-    end
+    level:load()
 end
 
 local drawSystems = function(_, s) return not not s.isDrawingSystem end
@@ -34,7 +26,6 @@ local updateSystems = function(_, s) return not s.isDrawingSystem end
 
 function love.draw()
     if world then
-
         world:update(love.timer.getDelta(), drawSystems)
     end
     love.graphics.print("Entity Count: " .. world:getEntityCount(), 0,0)
@@ -47,12 +38,4 @@ function love.update(dt)
         world:update(love.timer.getDelta(), updateSystems)
         -- print (world:getEntityCount())
     end
-end
-
-
-function init()
-    level:load()
-end
-
-function reset()
 end

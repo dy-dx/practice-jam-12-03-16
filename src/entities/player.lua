@@ -7,10 +7,6 @@ function Player:init()
     self.sprite = assets.img_megaman
     self.debugHitbox = true
     self.debugHitboxColor = { r = 0, g = 255, b = 0, a = 100 }
-    self:reset()
-end
-
-function Player:reset()
     self.controllable = true
 
     -- just guessing here
@@ -43,15 +39,7 @@ function Player:reset()
     self.animation = self.animationStand
 end
 
-function Player:getBounds()
-    return self.pos.x + self.hitbox.x, self.pos.y + self.hitbox.y, self.hitbox.w, self.hitbox.h
-end
-
 function Player:draw()
-end
-
-function Player:update(dt)
-    animation:update(dt)
 end
 
 return Player
