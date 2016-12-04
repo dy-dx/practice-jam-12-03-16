@@ -14,32 +14,14 @@ local function collisionFilter(e1, e2)
         if e2.isBullet then return nil end
         if e2.isEnemy then return 'cross' end
     elseif e1.isEnemy then
-        if e2.isBullet then return nil end
+        if e2.isBullet then return 'cross' end
         if e2.isEnemy then return nil end
         if e2.isPlayer then return 'cross' end
     elseif e1.isBullet then
         if e2.isPlayer or e2.isBullet then return nil end
+        if e2.isEnemy then return 'cross' end
     end
-    if e1.isSolid then
-        if type(e2) == "string" then -- tile collision
-            if e2:byte(1) == oneWayPrefix then -- one way tile
-                if e1.isBullet then
-                    return 'onewayplatformTouch'
-                else
-                    return 'onewayplatform'
-                end
-            else
-                return 'slide'
-            end
-        elseif e2.isSolid then
-            return 'slide'
-        elseif e2.isBouncy then
-            return 'bounce'
-        else
-            return 'cross'
-        end
-    end
-    return nil
+    return 'slide'
 end
 
 function BumpPhysicsSystem:process(e, dt)
@@ -66,20 +48,6 @@ function BumpPhysicsSystem:process(e, dt)
                 end
             else
                 vel.x = 0
-            end
-        elseif col.type == "onewayplatform" then
-            if col.didTouch then
-                vel.y = 0
-                e.grounded = true
-            else
-                collided = false
-            end
-        elseif col.type == "onewayplatformTouch" then
-            if col.didTouch then
-                vel.y = 0
-                e.grounded = true
-            else
-                collided = false
             end
         elseif col.type == "bounce" then
             if col.normal.x == 0 then

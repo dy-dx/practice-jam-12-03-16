@@ -11,16 +11,17 @@ function Player:init()
 
     -- just guessing here
     self.hitbox = {x = 10, y = 10, w = 30, h = 30}
-    self.isAlive = true
-    self.isSolid = true
 
+    -- movement/orientation
     self.facingRight = true
-    self.pos = {x = 100, y = 500}
-    self.vel = {x = 0, y = 0}
     self.xSpeed = 200
     self.jumpVelocity = -200
     self.gravity = 1000
+    self.pos = {x = 100, y = 500}
+    self.vel = {x = 0, y = 0}
+    self.isPlayer = true
 
+    -- cooldowns
     self.maxJumpTime = 0.3
     self.canJump = true
     self.jumpTime = 0
@@ -29,6 +30,7 @@ function Player:init()
     self.canShoot = true
     self.timeSinceShot = 1
 
+    -- animations
     local g = anim8.newGrid(50, 50, assets.img_megaman:getWidth(), assets.img_megaman:getHeight())
     self.animationStand = anim8.newAnimation(g('1-1', 1), 0.1)
     self.animationShoot = anim8.newAnimation(g(3, 2), 0.1)
