@@ -10,8 +10,8 @@ function CollisionLayer:init(tileMap, bumpWorld)
                 for x, tile in pairs(tiles) do
                     bumpWorld:add(
                         prefix..layer.name..", "..x..", "..y..")",
-                        x * tileMap.tilewidth  + tile.offset.x,
-                        y * tileMap.tileheight + tile.offset.y,
+                        (x-1) * tileMap.tilewidth  + tile.offset.x,
+                        (y-1) * tileMap.tileheight + tile.offset.y,
                         tile.width,
                         tile.height
                     )
