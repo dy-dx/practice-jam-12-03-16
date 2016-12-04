@@ -1,5 +1,4 @@
 local layerUtils = require 'utils/layerutils'
-local CollisionBox = require 'entities/collisionbox'
 
 local CollisionLayer = Class{}
 
