@@ -9,6 +9,7 @@ end
 local oneWayPrefix = "o"
 oneWayPrefix = oneWayPrefix:byte(1)
 local function collisionFilter(e1, e2)
+    if e1.isStatic then return nil end
     if e1.isPlayer then
         if e2.isBullet then return nil end
         if e2.isEnemy then return 'cross' end
