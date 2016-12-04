@@ -5,24 +5,25 @@ local Player = Class{}
 
 function Player:init()
     self.sprite = assets.img_megaman
+    self.debugHitbox = true
+    self.debugHitboxColor = { r = 0, g = 255, b = 0, a = 100 }
     self:reset()
 end
 
 function Player:reset()
-    self.debugHitbox = true
-    self.debugHitboxColor = { r = 0, g = 255, b = 0, a = 100 }
     self.controllable = true
+
+    -- just guessing here
+    self.hitbox = {x = 10, y = 10, w = 30, h = 30}
     self.isAlive = true
     self.isSolid = true
-    self.pos = {x = 100, y = 500}
+
     self.facingRight = true
+    self.pos = {x = 100, y = 500}
     self.vel = {x = 0, y = 0}
     self.xSpeed = 200
     self.jumpVelocity = -200
     self.gravity = 1000
-
-    -- just guessing here
-    self.hitbox = {x = 10, y = 10, w = 30, h = 30}
 
     self.maxJumpTime = 0.3
     self.canJump = true

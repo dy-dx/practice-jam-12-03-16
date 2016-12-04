@@ -16,14 +16,16 @@ function DebugHitboxSystem:postProcess(dt)
 end
 
 function DebugHitboxSystem:process(e, dt)
-    local pos = e.pos
-    local hitbox = e.hitbox
-    local c = self.defaultColor
-    if e.debugHitboxColor then
-        c = e.debugHitboxColor
+    if e.debugHitbox then
+        local pos = e.pos
+        local hitbox = e.hitbox
+        local c = self.defaultColor
+        if e.debugHitboxColor then
+            c = e.debugHitboxColor
+        end
+        love.graphics.setColor(c.r, c.g, c.b, c.a)
+        love.graphics.rectangle('fill', pos.x + hitbox.x, pos.y + hitbox.y, hitbox.w, hitbox.h)
     end
-    love.graphics.setColor(c.r, c.g, c.b, c.a)
-    love.graphics.rectangle('fill', pos.x + hitbox.x, pos.y + hitbox.y, hitbox.w, hitbox.h)
 end
 
 return DebugHitboxSystem

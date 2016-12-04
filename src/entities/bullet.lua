@@ -3,10 +3,17 @@ local Bullet = Class{}
 
 function Bullet:init(x, y, movingRight)
     self.sprite = love.graphics.newImage("assets/images/bullet.png")
+
+    self.debugHitbox = false
+    self.debugHitboxColor = { r = 0, g = 255, b = 0, a = 100 }
+
     self:reset(x, y, movingRight)
 end
 
 function Bullet:reset(x, y, movingRight)
+    -- 15 x 15 center of image
+    self.hitbox = {x = 10, y = 10, w = 15, h = 15}
+
     self.isDead = false
     self.isSolid = true
     self.hasProjectilePhysics = true
