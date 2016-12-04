@@ -49,6 +49,9 @@ function BumpPhysicsSystem:process(e, dt)
             else
                 vel.x = 0
             end
+        elseif col.type == "cross" then
+            world:remove(e)
+            break
         elseif col.type == "bounce" then
             if col.normal.x == 0 then
                 vel.y = -vel.y
