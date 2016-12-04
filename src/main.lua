@@ -25,7 +25,7 @@ local updateSystems = function(_, s) return not s.isDrawingSystem end
 
 function love.draw()
     if world then
-        -- map:draw()
+        map:draw()
         world:update(love.timer.getDelta(), drawSystems)
     end
     love.graphics.print("Entity Count: " .. world:getEntityCount(), 0,0)
