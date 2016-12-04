@@ -6,21 +6,14 @@ local CollisionLayer = Class{}
 function CollisionLayer:init(map)
     self:reset()
 
-    printTable(layerUtils:getLayer('MiddleLayer'))
-    -- printTable(Global.map.layers)
-    printTable(layerUtils:getLayer('MiddleLayer').data)
+    local tileWidth = Global.map.tilewidth
+    local tileHeight = Global.map.tileheight
 
-    print('width ' .. layerUtils:getLayer('MiddleLayer').width)
-    print('height ' .. layerUtils:getLayer('MiddleLayer').height)
-    print("properties")
-    printTable(layerUtils:getLayer('MiddleLayer').properties)
-
-    print("batches")
-    printTable(layerUtils:getLayer('MiddleLayer').batches)
-
-    -- world:addEntity(CollisionBox(0, 550, 800, 30))
-    -- world:addEntity(CollisionBox(0, 0, 40, 600))
-    -- world:addEntity(CollisionBox(700, 0, 40, 600))
+    for y, tiles in ipairs(layerUtils:getLayer('MiddleLayer').data) do
+        for x, tile in pairs(tiles) do
+            world:addEntity(CollisionBox((x - 1) * tileWidth, (y - 1) * tileHeight, tileWidth, tileHeight))
+        end
+    end
 end
 
 function CollisionLayer:reset()
