@@ -7,11 +7,19 @@ Signal = require '../vendor/hump.signal'
 sti = require "../vendor/sti.init"
 tiny = require '../vendor/tiny'
 
+Global = {}
+
+function printTable(mytable)
+    for k, v in pairs(mytable) do
+       print(k, v)
+    end
+end
+
 local level = require('states/level0')()
 
 function love.load()
     init()
-    map = sti("tiled/ourfirsttiles.lua", {  })
+    Global.map = sti("tiled/ourfirsttiles.lua", {  });
 end
 
 function love.keypressed(key)
@@ -25,7 +33,7 @@ local updateSystems = function(_, s) return not s.isDrawingSystem end
 
 function love.draw()
     if world then
-        map:draw()
+
         world:update(love.timer.getDelta(), drawSystems)
     end
     love.graphics.print("Entity Count: " .. world:getEntityCount(), 0,0)
@@ -36,6 +44,7 @@ function love.update(dt)
     Timer.update(dt)
     if world then
         world:update(love.timer.getDelta(), updateSystems)
+        -- print (world:getEntityCount())
     end
 end
 
