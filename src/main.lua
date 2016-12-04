@@ -6,6 +6,7 @@ Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
 sti = require "../vendor/sti.init"
 tiny = require '../vendor/tiny'
+local Sound = require 'sound'
 
 Global = {}
 

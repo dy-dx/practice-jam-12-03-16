@@ -59,11 +59,12 @@ function PlayerControlSystem:process(e, dt)
     end
 
     if self.input:down("z") and e.canShoot then
+        Signal.emit('meow');
         world:addEntity(Bullet(e.pos.x + 5, e.pos.y + 5, e.facingRight))
         e.timeSinceShot = 0
         e.canShoot = false
     end
-    
+
     -- select animation
     -- shooting
     if self.input:down("z") then
