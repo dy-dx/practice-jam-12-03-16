@@ -5,6 +5,9 @@ local Met = Class{}
 function Met:init(x, y, target)
     self.sprite = love.graphics.newImage('assets/images/met_sample_sprite_left.png')
 
+    self.debugHitbox = true
+    self.debugHitboxColor = { r = 0, g = 0, b = 255, a = 100 }
+
     -- these are all copied from that demo project
     -- this doesn't do anything yet
 

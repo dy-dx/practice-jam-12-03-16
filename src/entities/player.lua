@@ -9,6 +9,8 @@ function Player:init()
 end
 
 function Player:reset()
+    self.debugHitbox = true
+    self.debugHitboxColor = { r = 0, g = 255, b = 0, a = 100 }
     self.controllable = true
     self.isAlive = true
     self.isSolid = true
